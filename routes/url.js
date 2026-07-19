@@ -95,14 +95,25 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     res.render("urls/edit", { url });
 });
 
-
 router.put("/:id", isLoggedIn, async (req, res) => {
 
     const { id } = req.params;
-    const { originalUrl } = req.body;
+    const { originalUrl, shortCode } = req.body;
+
+    // Duplicate short code check
+    const existing = await Url.findOne({
+        shortCode,
+        _id: { $ne: id }
+    });
+
+    if (existing) {
+        req.flash("error", "Short code already exists!");
+        return res.redirect(`/url/${id}/edit`);
+    }
 
     await Url.findByIdAndUpdate(id, {
-        originalUrl
+        originalUrl,
+        shortCode
     });
 
     req.flash("success", "URL updated successfully!");
