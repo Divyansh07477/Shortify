@@ -12,7 +12,7 @@ router.post("/create", isLoggedIn, async (req, res) => {
 
 let { originalUrl, customCode } = req.body;
 
-let shortCode = customCode || nanoid(6);
+let shortCode = (customCode || nanoid(6)).trim().replace(/\s+/g, "");
 
 //duplicate check
 const existing = await Url.findOne({
