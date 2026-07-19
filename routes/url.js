@@ -58,7 +58,9 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
 
     if (search && search.trim()) {
 
-        const keyword = search.trim().replace("http://localhost:9090/", "");
+        const keyword = search
+    .trim()
+    .replace(process.env.BASE_URL + "/", "");
 
         filter.$or = [
             {
