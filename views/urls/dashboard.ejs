@@ -145,7 +145,7 @@ Shortify
 <input
 type="text"
 class="form-control"
-value="http://localhost:9090/<%= url.shortCode %>"
+value="<%= baseUrl %>/<%= url.shortCode %>"
 id="url-<%= url._id %>"
 readonly>
 <button class="btn btn-primary copy-btn" data-url="<%= url.shortCode %>">
@@ -281,8 +281,7 @@ document.querySelectorAll(".copy-btn").forEach(btn => {
 
     btn.addEventListener("click", async () => {
 
-        const shortUrl = `http://localhost:9090/${btn.dataset.url}`;
-
+      const shortUrl = `<%= baseUrl %>/${btn.dataset.url}`;
         await navigator.clipboard.writeText(shortUrl);
 
         btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
