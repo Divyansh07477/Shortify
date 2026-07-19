@@ -85,6 +85,17 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
 
 });
 // update
+
+
+router.get("/:id/edit", isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+
+    const url = await Url.findById(id);
+
+    res.render("urls/edit", { url });
+});
+
+
 router.put("/:id", isLoggedIn, async (req, res) => {
 
     const { id } = req.params;
