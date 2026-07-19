@@ -1,0 +1,114 @@
+<% layout("layouts/boilerplate") %>
+
+
+
+
+    <a href="/" class="back-arrow">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+
+            <div class="card shadow-lg border-0 p-5 text-center">
+
+
+                <div class="mb-3">
+                    <i class="fa-solid fa-circle-check fa-4x text-success"></i>
+                </div>
+
+
+                <h2 class="fw-bold">
+                    Your Short URL is Ready 
+                </h2>
+
+
+                <p class="text-muted mt-3">
+                    Share your shortened link anywhere
+                </p>
+
+
+
+                <div class="input-group mt-4">
+
+                    <input 
+                    type="text"
+                    class="form-control"
+                    value="<%= shortUrl %>"
+                    id="shortUrl"
+                    readonly>
+
+
+                    <button 
+                    class="btn btn-primary"
+                    onclick="copyUrl()">
+
+                    <i class="fa-solid fa-copy"></i>
+                    Copy
+
+                    </button>
+
+                </div>
+
+
+
+                <a href="/"
+                class="btn btn-outline-dark mt-4">
+
+                <i class="fa-solid fa-plus"></i>
+                Create Another
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+function copyUrl(){
+
+    let input = document.getElementById("shortUrl");
+
+    input.select();
+
+    navigator.clipboard.writeText(input.value);
+
+    alert("Short URL Copied!");
+
+}
+
+
+document.querySelectorAll(".copy-btn").forEach(btn => {
+
+    btn.addEventListener("click", async () => {
+
+        const shortUrl = `http://localhost:9090/${btn.dataset.url}`;
+
+        await navigator.clipboard.writeText(shortUrl);
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-success");
+
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy';
+            btn.classList.remove("btn-success");
+            btn.classList.add("btn-primary");
+        }, 2000);
+
+    });
+
+});
+</script>

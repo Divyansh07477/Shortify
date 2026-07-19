@@ -1,0 +1,72 @@
+
+<% layout("layouts/boilerplate") %>
+
+<a href="/url/dashboard" class="back-arrow">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 p-4">
+
+                <h2 class="text-center fw-bold mb-4">
+
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+
+                    Edit URL
+
+                </h2>
+
+                <form action="/url/<%= url._id %>?_method=PUT" method="POST">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Original URL
+                        </label>
+
+                        <input
+                            type="url"
+                            name="originalUrl"
+                            class="form-control form-control-lg"
+                            value="<%= url.originalUrl %>"
+                            required>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Short Code
+                        </label>
+
+                        <input
+    type="text"
+    name="shortCode"
+    class="form-control form-control-lg"
+    value="<%= url.shortCode %>"
+    required>
+
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Update URL
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

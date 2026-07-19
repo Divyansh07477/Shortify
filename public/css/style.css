@@ -1,0 +1,167 @@
+body{
+    
+    min-height:100vh;
+}
+
+.hero{
+    padding:70px 0;
+}
+
+.card{
+    border-radius:20px;
+}
+
+.form-control{
+    border-radius:12px;
+}
+
+.btn{
+    border-radius:12px;
+}
+footer i{
+    font-size:22px;
+    transition:0.3s;
+}
+
+footer i:hover{
+    color:#0d6efd;
+}
+footer{
+    margin-top: 100px;
+}
+
+
+/* auto footer */
+html, body{
+    height:100%;
+}
+
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+footer{
+    margin-top:auto;
+}
+
+/* navbar sticky */
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+   
+}
+
+.custom-navbar{
+    background-color: #000000;
+}
+
+
+
+/* back button */
+.back-arrow{
+    position: absolute;
+    top: 40px;    
+    left: 20px;     
+    font-size: 28px;
+    color: #0d6efd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.back-arrow:hover{
+    color: #084298;
+    transform: translateX(-5px);
+}
+
+.back-arrow:hover{
+    color: #0d6efd;
+}
+
+/* hover effect card */
+.feature-card{
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    cursor: default;
+}
+.feature-card:hover{
+    transform: translateY(-8px);
+    background: #b8d4ff;
+    color: #0d6efd;
+    box-shadow: 0 10px 25px rgba(13,110,253,0.40);
+}
+
+
+.logo{
+    height: 65px;
+    width: 100px;
+   margin-left: -110%;
+}
+
+
+.navbar-brand{
+    padding: 0;
+    margin-right: -5%;
+    
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px){
+
+    .navbar-brand{
+        font-size: 1.2rem;
+    }
+
+    .logo{
+        width: 45px;
+        height: 45px;
+    }
+
+    .card{
+        padding: 20px !important;
+    }
+
+    h1{
+        font-size: 1.8rem;
+    }
+
+    h2{
+        font-size: 1.5rem;
+    }
+
+    .form-control-lg{
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .btn-lg{
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .table{
+        font-size: 0.9rem;
+    }
+
+    .input-group{
+        flex-direction: column;
+    }
+
+    .input-group .btn{
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    footer{
+        text-align: center;
+    }
+
+    .back-arrow{
+        top: 75px;
+        left: 15px;
+    }
+
+}

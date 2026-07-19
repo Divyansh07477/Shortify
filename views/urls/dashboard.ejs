@@ -1,0 +1,304 @@
+
+
+
+<% layout("layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body class="bg-light">
+
+
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/">
+            <i class="fa-solid fa-link"></i>
+Shortify
+        </a>
+
+        <div>
+
+            <a href="/" class="btn btn-outline-light me-2">
+                Home
+            </a>
+
+            <a href="/users/logout" class="btn btn-danger">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                <i class="fa-solid fa-chart-line text-primary"></i>
+
+                Shortify Dashboard
+
+            </h2>
+
+            <p class="text-muted">
+
+                Manage all your shortened URLs
+
+            </p>
+
+        </div>
+
+        <a href="/" class="btn btn-primary">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Create New
+
+        </a>
+
+    </div>
+
+<form action="/url/dashboard" method="GET" class="mb-4">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="Search URL...">
+
+        <button class="btn btn-dark" type="submit">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </div>
+
+</form>
+
+<div class="table-responsive">
+
+<table class="table table-hover table-bordered align-middle shadow">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Original URL</th>
+
+<th>Short URL</th>
+
+<th>Clicks</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<% urls.forEach(url => { %>
+
+<tr>
+
+<td style="max-width:300px; word-break:break-word;">
+
+<%= url.originalUrl %>
+
+</td>
+
+<td>
+
+<div class="input-group">
+
+<input
+type="text"
+class="form-control"
+value="http://localhost:9090/<%= url.shortCode %>"
+id="url-<%= url._id %>"
+readonly>
+<button class="btn btn-primary copy-btn" data-url="<%= url.shortCode %>">
+    <i class="fa-solid fa-copy"></i> Copy
+</button>
+
+</div>
+
+</td>
+
+<td>
+
+<span class="badge bg-success fs-6">
+
+<%= url.clicks %>
+
+</span>
+
+</td>
+
+<td>
+
+<a
+href="/url/<%= url._id %>/edit"
+class="btn btn-warning btn-sm">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<form
+action="/url/<%= url._id %>?_method=DELETE"
+method="POST"
+class="d-inline">
+
+<button
+type="submit"
+class="btn btn-danger btn-sm">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<div style="height:50px;"></div>
+
+<footer class="bg-dark text-white py-10">
+
+    <div class="container text-center">
+
+        <h5 class="mb-1">URL Shortener</h5>
+
+        <p class="mb-2">
+            Made with  by <strong>Divyansh Singh</strong>
+        </p>
+
+        <div class="mb-3">
+
+            <a href="https://github.com/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+            <a href="https://www.instagram.com/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+           
+
+        </div>
+
+        <small>
+            © 2026 All Rights Reserved
+        </small>
+
+    </div>
+
+</footer>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script>
+function copyUrl(id) {
+
+    let input = document.getElementById("url-" + id);
+
+    input.select();
+
+    navigator.clipboard.writeText(input.value);
+
+    alert("URL Copied!");
+}
+</script>
+
+
+
+
+
+
+
+
+<!-- copy -->
+
+<script>
+document.querySelectorAll(".copy-btn").forEach(btn => {
+
+    btn.addEventListener("click", async () => {
+
+        const shortUrl = `http://localhost:9090/${btn.dataset.url}`;
+
+        await navigator.clipboard.writeText(shortUrl);
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-success");
+
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy';
+            btn.classList.remove("btn-success");
+            btn.classList.add("btn-primary");
+        }, 2000);
+
+    });
+
+});
+
+</script>
+</body>
+</html>

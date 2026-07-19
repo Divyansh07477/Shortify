@@ -1,0 +1,177 @@
+  <% layout("layouts/boilerplate") %>
+
+  <!-- back button -->
+    <a href="/" class="back-arrow">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<div class="container mt-5">
+
+
+    <div class="row justify-content-center">
+
+
+        <div class="col-md-5">
+
+
+            <div class="card shadow-lg border-0 p-4">
+
+
+                <h2 class="text-center mb-4 fw-bold">
+
+                    <i class="fa-solid fa-right-to-bracket text-primary"></i>
+
+                    Login
+
+                </h2>
+
+
+
+                <form action="/users/login" method="POST">
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        placeholder="Enter username"
+                        required>
+
+                    </div>
+
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+                     <input
+                              type="password"
+                        name="password"
+                      id="password"
+               class="form-control"
+              placeholder="Enter password"
+                       required>
+
+
+                    </div>
+
+
+
+                    <button class="btn btn-primary w-100">
+
+                        <i class="fa-solid fa-lock-open"></i>
+
+                        Login
+
+                    </button>
+
+
+                </form>
+                <div class="form-check mb-3">
+
+    <input 
+    class="form-check-input" 
+    type="checkbox" 
+    id="showPassword"
+    onclick="showPass()">
+
+    <label class="form-check-label" for="showPassword">
+        Show Password
+    </label>
+
+  
+
+</div>
+
+
+
+                <p class="text-center mt-3">
+
+                    Don't have an account?
+
+                    <a href="/users/signup">
+                        Signup
+                    </a>
+
+                </p>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<div style="height:50px;"></div>
+
+<footer class="bg-dark text-white py-10">
+
+    <div class="container text-center">
+
+        <h5 class="mb-1">URL Shortener</h5>
+
+        <p class="mb-2">
+            Made with  by <strong>Divyansh Singh</strong>
+        </p>
+
+        <div class="mb-3">
+
+            <a href="https://github.com/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+            <a href="https://www.instagram.com/yourusername" target="_blank"
+               class="text-white fs-4 me-3">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+         
+
+        </div>
+
+        <small>
+            © 2026 All Rights Reserved
+        </small>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+function showPass(){
+
+    let password = document.getElementById("password");
+
+    if(password.type === "password"){
+        password.type = "text";
+    }
+    else{
+        password.type = "password";
+    }
+
+}
+
+</script>
