@@ -78,7 +78,10 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
 
     const urls = await Url.find(filter);
 
-    res.render("urls/dashboard", { urls });
+    res.render("urls/dashboard", {
+        urls,
+        baseUrl: process.env.BASE_URL
+    });
 
 });
 // update
