@@ -94,13 +94,19 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
 
     const url = await Url.findById(id);
 
-    res.render("urls/edit", { url });
+    res.render("urls/edit", { url,baseUrl: process.env.BASE_URL });
 });
 
+
+
+
+//update 2
 router.put("/:id", isLoggedIn, async (req, res) => {
 
     const { id } = req.params;
-    const { originalUrl, shortCode } = req.body;
+    const { originalUrl } = req.body;
+
+    const shortCode = req.body.shortCode.trim().replace(/\s+/g, "");
 
     // Duplicate short code check
     const existing = await Url.findOne({
@@ -121,7 +127,6 @@ router.put("/:id", isLoggedIn, async (req, res) => {
     req.flash("success", "URL updated successfully!");
     res.redirect("/url/dashboard");
 });
-
 //delete
 router.delete("/:id", isLoggedIn, async (req, res) => {
 
