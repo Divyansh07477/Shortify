@@ -94,9 +94,36 @@ app.engine("ejs", ejsMate);
 
 
 
-//url  not found ka he
-app.get("/:shortCode", async (req, res) => {
+// //url  not found ka he
+// app.get("/:shortCode", async (req, res) => {
 
+//     const { shortCode } = req.params;
+
+//     const url = await Url.findOne({ shortCode });
+
+//     if (!url) {
+//         return res.send("URL not found");
+//     }
+
+//     url.clicks++;
+//     await url.save();
+
+//     res.redirect(url.originalUrl);
+// });
+
+
+
+
+// app.get("/", (req, res) => {
+//     res.send("URL Shortener Working");
+// });
+app.get("/", (req, res) => {
+    res.render("home");
+});
+
+
+// last route
+app.get("/:shortCode", async (req, res) => {
     const { shortCode } = req.params;
 
     const url = await Url.findOne({ shortCode });
@@ -111,17 +138,12 @@ app.get("/:shortCode", async (req, res) => {
     res.redirect(url.originalUrl);
 });
 
-
-
-
-// app.get("/", (req, res) => {
-//     res.send("URL Shortener Working");
+// app.listen(9090, () => {
+//     console.log("Server listening 9090");
 // });
 
-app.get("/", (req, res) => {
-    res.render("home");
-});
+const port = process.env.PORT || 9090;
 
-app.listen(9090, () => {
-    console.log("Server listening 9090");
+app.listen(port, () => {
+    console.log(`Server listening on ${port}`);
 });
